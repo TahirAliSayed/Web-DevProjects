@@ -1,0 +1,280 @@
+body {
+    
+    font-family: 'Press Start 2P', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f0c29;  
+    background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: #fff;
+    overflow-x: hidden;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05) 0%, transparent 20%);
+    background-attachment: fixed;
+}
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.7);
+    box-shadow: 0 2px 15px rgba(0,255,255,0.4);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+.navbar li {
+    float: left;
+}
+.navbar li a {
+    display: block;
+    color: #0ff;
+    text-align: center;
+    padding: 16px 20px;
+    text-decoration: none;
+    transition: all 0.3s;
+    text-shadow: 0 0 5px #0ff;
+}
+.navbar li a:hover {
+    background-color: rgba(0,255,255,0.2);
+    color: #fff;
+    text-shadow: 0 0 10px #fff;
+}
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,255,255,0.3);
+    text-align: center;
+    border: 1px solid rgba(0,255,255,0.2);
+    position: relative;
+    overflow: hidden;
+}
+.container::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px dashed rgba(0,255,255,0.3);
+    border-radius: 20px;
+    animation: borderPulse 4s infinite linear;
+    pointer-events: none;
+}
+@keyframes borderPulse {
+    0% { border-color: rgba(0,255,255,0.3); }
+    50% { border-color: rgba(0,255,255,0.1); }
+    100% { border-color: rgba(0,255,255,0.3); }
+}
+h1 {
+    color: rgb(1, 7, 7);
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+    letter-spacing: 2px;
+}
+pre {
+    background: rgba(0,0,0,0.4);
+    padding: 15px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    text-align: left;
+    margin: 20px 0;
+    color: #0f0;
+    border-left: 3px solid #0f0;
+    box-shadow: 0 0 10px rgba(0,255,0,0.2);
+}
+label {
+    display: block;
+    margin: 20px 0 10px;
+    font-weight: bold;
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff;
+    font-size: 1.2em;
+}
+input[type="text"] {
+    padding: 12px 20px;
+    width: 250px;
+    border: 2px solid #0ff;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,255,255,0.3);
+}
+input[type="text"]:focus {
+    border-color: #f0f;
+    outline: none;
+    box-shadow: 0 0 15px rgba(255,0,255,0.5);
+}
+button {
+    background-color: #f0f;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    margin: 20px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(255,0,255,0.4);
+    position: relative;
+    overflow: hidden;
+}
+button:hover {
+    background-color: #ff0;
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255,255,0,0.6);
+}
+button:active {
+    transform: translateY(1px);
+}
+button::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255,255,255,0.1);
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+button:hover::after {
+    animation: buttonShine 1.5s infinite;
+}
+@keyframes buttonShine {
+    0% { left: -50%; top: -50%; }
+    100% { left: 150%; top: 150%; }
+}
+#ans {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff0;
+    margin: 30px 0;
+    min-height: 50px;
+    text-shadow: 0 0 10px #ff0;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,0,0.3);
+}
+.game-rules {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 10px;
+    text-align: left;
+    border-left: 3px solid #f0f;
+    box-shadow: 0 0 15px rgba(255,0,255,0.2);
+}
+.game-rules h3 {
+    color: #f0f;
+    border-bottom: 1px dashed #f0f;
+    padding-bottom: 10px;
+    text-shadow: 0 0 5px #f0f;
+}
+.scoreboard {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+    background: rgba(0,0,0,0.5);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,255,255,0.3);
+}
+.score {
+    text-align: center;
+}
+.score h3 {
+    color: #0ff;
+    margin-bottom: 10px;
+}
+.score-value {
+    font-size: 24px;
+    color: #ff0;
+    text-shadow: 0 0 5px #ff0;
+}
+.choice-display {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+.choice {
+    text-align: center;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.4);
+    min-width: 150px;
+}
+.choice h4 {
+    color: #0ff;
+    margin-bottom: 10px;
+}
+.choice-icon {
+    font-size: 40px;
+    margin: 10px 0;
+}
+.game-history {
+    margin-top: 30px;
+    max-height: 200px;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.4);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+}
+.game-history h3 {
+    color: #0f0;
+    border-bottom: 1px dashed #0f0;
+    padding-bottom: 10px;
+}
+.history-item {
+    padding: 8px 0;
+    border-bottom: 1px dotted rgba(0,255,255,0.2);
+}
+.history-item:last-child {
+    border-bottom: none;
+}
+.glow {
+    animation: glow 1s infinite alternate;
+}
+@keyframes glow {
+    from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0ff, 0 0 20px #0ff; }
+    to { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #0ff, 0 0 40px #0ff; }
+}
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: #0ff;
+    font-size: 12px;
+    margin-top: 50px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.2);
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(0,255,255,0.5);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0,255,255,0.8);
+}
