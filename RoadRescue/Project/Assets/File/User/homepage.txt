@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Assets/Templates/Admin/assets/images/favicon.png">
+    <title>Admin Page</title>
+    <link href="../Assets/Templates/Admin/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
+    <link href="../Assets/Templates/Admin/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="../Assets/Templates/Admin/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <link href="../Assets/Templates/Admin/dist/css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+        <header class="topbar" data-navbarbg="skin6">
+            <nav class="navbar top-navbar navbar-expand-md">
+                <div class="navbar-header" data-logobg="skin6">
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
+                            class="ti-menu ti-close"></i></a>
+                    <div class="navbar-brand"></div>
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
+                        data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
+                            class="ti-more"></i></a>
+                </div>
+                <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Admin Dashboard</h3>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <div class="scroll-sidebar" data-sidebarbg="skin6">
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li align="center" style="font-size: 30px;"> Admin </li><br><br>
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="HomePage.php"
+                                aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
+                                    class="hide-menu">Dashboard</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Workshop Request Insights</h4>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <!-- Chart Type Selector -->
+                                        <select id="chart-type" class="form-control mb-3">
+                                            <option value="bar">Bar Chart</option>
+                                            <option value="line">Line Chart</option>
+                                            <option value="stacked-bar">Stacked Bar Chart</option>
+                                            <option value="pie">Pie Chart</option>
+                                        </select>
+                                        <!-- Chart Container -->
+                                        <div id="insights-chart"></div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <!-- Legend -->
+                                        <div id="insights-legend" class="mt-4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer text-center text-muted">
+                Designed and Developed by RoadRescue.
+            </footer>
+        </div>
+    </div>
+    <script src="../Assets/Templates/Admin/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../Assets/Templates/Admin/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../Assets/Templates/Admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../Assets/Templates/Admin/dist/js/app-style-switcher.js"></script>
+    <script src="../Assets/Templates/Admin/dist/js/feather.min.js"></script>
+    <script src="../Assets/Templates/Admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../Assets/Templates/Admin/dist/js/sidebarmenu.js"></script>
+    <script src="../Assets/Templates/Admin/dist/js/custom.min.js"></script>
+    <script src="../Assets/Templates/Admin/assets/extra-libs/c3/d3.min.js"></script>
+    <script src="../Assets/Templates/Admin/assets/extra-libs/c3/c3.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Data for the chart
+            const workshops = <?php echo json_encode($workshops); ?>;
+            const accepted = <?php echo json_encode($accepted); ?>;
+            const rejected = <?php echo json_encode($rejected); ?>;
+            const completed = <?php echo json_encode($completed); ?>;
+
+            // Initialize the chart
+            const chart = c3.generate({
+                bindto: '#insights-chart',
+                data: {
+                    columns: [
+                        ['Accepted', ...accepted],
+                        ['Rejected', ...rejected],
+                        ['Completed', ...completed]
+                    ],
+                    type: 'bar', // Default chart type
+                    colors: {
+                        Accepted: '#36a2eb', // Blue
+                        Rejected: '#ff6384', // Red
+                        Completed: '#4bc0c0' // Teal
+                    },
+                    groups: [
+                        ['Accepted', 'Rejected', 'Completed']
+                    ]
+                },
+                axis: {
+                    x: {
+                        type: 'category',
+                        categories: workshops,
+                        label: 'Workshops',
+                        tick: {
+                            rotate: -45, // Rotate labels for better readability
+                            multiline: false
+                        }
+                    },
+                    y: {
+                        label: 'Number of Requests'
+                    }
+                },
+                bar: {
+                    width: {
+                        ratio: 0.6 // Adjust bar width
+                    }
+                },
+                legend: {
+                    show: true // Show legend
+                },
+                tooltip: {
+                    format: {
+                        title: function (d) { return 'Workshop: ' + workshops[d]; },
+                        value: function (value, ratio, id) {
+                            return id.toUpperCase() + ': ' + value; // Display individual values in tooltip
+                        }
+                    }
+                }
+            });
+
+            // Custom Legend
+            const legend = document.getElementById('insights-legend');
+            const legendData = [
+                { label: 'Accepted', color: '#36a2eb' },
+                { label: 'Rejected', color: '#ff6384' },
+                { label: 'Completed', color: '#4bc0c0' }
+            ];
+
+            legendData.forEach(item => {
+                const legendItem = document.createElement('div');
+                legendItem.className = 'd-flex align-items-center mb-2';
+                legendItem.innerHTML = `
+                    <div class="legend-color" style="width: 20px; height: 20px; background-color: ${item.color}; margin-right: 10px;"></div>
+                    <span>${item.label}</span>
+                `;
+                legend.appendChild(legendItem);
+            });
+
+            // Chart Type Switcher
+            document.getElementById('chart-type').addEventListener('change', function (e) {
+                const type = e.target.value;
+                if (type === 'stacked-bar') {
+                    chart.transform('bar');
+                    chart.groups([['Accepted', 'Rejected', 'Completed']]);
+                } else if (type === 'pie') {
+                    chart.transform(type);
+                    chart.groups([]); // Clear groups for pie chart
+                } else {
+                    chart.transform(type);
+                    chart.groups([]); // Clear groups for non-stacked charts
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

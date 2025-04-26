@@ -1,0 +1,132 @@
+FINISHED:
+Main
+Guest/Signup
+WORKSHOP
+USER
+
+TODAYS WORK:
+
+
+CHANGES:
+google sign in
+razorpay
+maps integrate
+chatting
+ ui
+
+
+
+
+
+
+
+
+LOGIN DETAILS-
+tahirop@gmail.com pass:123 (admin)
+chef@gmail.com pass:12341234(mech)
+sda@gmail.com pass:12341234(Workshop)
+hello@gmail.com pass:Tahir1234(user)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+User (logged in):
+
+Feedback/complaint after successful repairs
+Complaint page (add workshops Complaint page here)
+
+Workshop(logged in):
+complaint page(remove first table fields)
+
+
+
+color:
+e4c2c2 Cream
+E81C2E RED
+0cc841 green
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Complaint code(Workshop)
+<table>
+    <tr align="center">
+      <td>Si.no</td>
+       <td>complaint_type</td>
+        <td>Date</td>
+      <td>complaints</td>
+      
+            <td>Replay</td>
+
+    </tr>
+   
+    
+<?php
+$i=0;
+
+$selqry = "select * from tbl_complaint c inner join tbl_complainttype t on c.complainttype_id=t.complainttype_id inner join tbl_workshop s on c.workshop_id=s.workshop_id  where c.workshop_id='".$_SESSION["wid"]."'";
+$result=$conn->query($selqry);
+while($row = $result->fetch_assoc())
+{
+	$i++;
+?>
+		<tr align="center">
+        	<td>
+            <?php echo $i;?>
+            </td>
+            <td>
+            <?php echo $row["complainttype_name"];?>
+            </td>   
+             <td>
+            <?php echo $row["complaint_date"];?>
+            </td>
+             <td>
+            <?php echo $row["complaint_content"];?>
+            </td>   
+                  
+       		 <td>
+            <?php echo $row["complaint_reply"];?>
+            </td>   
+        
+        <?php
+}
+
+?>   
+
+   
+  </table>
