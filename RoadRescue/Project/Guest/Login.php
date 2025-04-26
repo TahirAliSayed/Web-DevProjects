@@ -272,7 +272,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['token'])) {
 
         window.onload = function () {
             google.accounts.id.initialize({
-                client_id: "624566371990-do2htsvqi1q441oennqd2ebbdeq74ncq.apps.googleusercontent.com", // Replace with your Google Client ID
+                client_id: "", // Replace with your Google Client ID
                 callback: handleCredentialResponse,
                 redirect_uri: "http://localhost/RoadRescue/RoadRescue/Project/Guest/Login.php" // Match your URL
             });
